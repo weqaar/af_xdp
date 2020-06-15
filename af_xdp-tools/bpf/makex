@@ -1,0 +1,20 @@
+KERNEL_SRC=/opt/repo/bpf-next
+TOOLS=${KERNEL_SRC}/tools
+BPFROOT=${KERNEL_SRC}/samples/bpf
+INCLUDE=${TOOLS}/lib/bpf
+KINCLUDE=${KERNEL_SRC}/include
+
+#clang -o loader -l elf -I${BPFROOT} -I${INCLUDE} -I${TOOLS}/perf -I${TOOLS}/testing/selftests/bpf \
+#		  -L/usr/lib64/libbpf.a ${BPFROOT}/bpf_load.c loader.c \
+#		  ${TOOLS}/testing/selftests/bpf/trace_helpers.o
+
+clang -O2 -Wall -l elf -Wno-unused-variable -o loader \
+-I ${KERNEL_SRC}/tools/lib \
+-I ${KERNEL_SRC}/tools/perf \
+-I ${KERNEL_SRC}/tools/include \
+-I ${BPFROOT} \
+-I ${TOOLS}/testing/selftests/bpf \
+-Wl,--library-path=./,-rpath=${INCLUDE},--library=bpf,--library=elf \
+${TOOLS}/testing/selftests/bpf/trace_helpers.o loader.c ${BPFROOT}/bpf_load.o
+
+#-Wl,--library-path=/usr/lib64,-rpath=${INCLUDE},--library=bpf,--library=elf \

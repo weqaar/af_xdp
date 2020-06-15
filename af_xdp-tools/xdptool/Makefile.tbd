@@ -1,0 +1,22 @@
+#Author: Weqaar Janjua
+
+CC		= gcc
+CFLAGS		= -Wall -Wmissing-prototypes -Wstrict-prototypes -pthread
+LFLAGS 		=
+LIBS		= -lbpf
+
+OBJFILES	= 
+
+MAIN		= xdptool
+
+all: $(MAIN)
+
+$(MAIN): $(OBJFILES)
+	$(CC) $(CFLAGS) $(LIBS) -o $(MAIN) $(OBJFILES)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+clean:
+	rm -f $(OBJFILES) $(MAIN)
+
