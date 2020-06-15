@@ -1,1 +1,0 @@
-clang -O2 -target bpf -c bpf_program.c -o bpf_program.o -I/usr/include/x86_64-linux-gnu -L/usr/local/lib64/libbpf.a

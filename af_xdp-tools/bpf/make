@@ -1,9 +1,0 @@
-KERNEL_SRC=/opt/repo/bpf-next
-TOOLS=${KERNEL_SRC}/tools
-BPFROOT=${KERNEL_SRC}/samples/bpf
-INCLUDE=/opt/repo/libbpf/include
-HEADERS=/opt/repo/libbpf/src
-
-#clang -o loader -l elf -I${INCLUDE} -I${HEADERS} -I${TOOLS} ${TOOLS}/bpf_load.c loader.c
-#clang -o loader -l elf -I/opt/repo/bpf-next/include -I${BPFROOT} -I${INCLUDE} -I${TOOLS}/perf -I${HEADERS} -I/usr/include -I/usr/include/x86_64-linux-gnu -L/usr/local/lib64/libbpf.a ${BPFROOT}/bpf_load.c loader.c
-clang -o loader -l elf -I${BPFROOT} -I${INCLUDE} -I${TOOLS}/perf -I${HEADERS} -I${TOOLS}/testing/selftests/bpf -I/usr/include/x86_64-linux-gnu -L/usr/local/lib64 ${BPFROOT}/bpf_load.c loader.c ${TOOLS}/testing/selftests/bpf/trace_helpers.o

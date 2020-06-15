@@ -5,9 +5,7 @@ ARCH := $(subst x86_64,x86,$(shell arch))
 
 KERNEL_SRC=/opt/repo/bpf-next
 TOOLS=${KERNEL_SRC}/tools
-BPFROOT=${KERNEL_SRC}/samples/bpf
 INCLUDE=${TOOLS}/lib/bpf
-KINCLUDE=${KERNEL_SRC}/include
 
 BIN := bpf_program.o
 CLANG_FLAGS = -I. -I$(KDIR)/arch/$(ARCH)/include \
@@ -19,12 +17,7 @@ CLANG_FLAGS = -I. -I$(KDIR)/arch/$(ARCH)/include \
 -I$(KDIR)/include/generated/uapi \
 -include $(KDIR)/include/linux/kconfig.h \
 -I$(KDIR)/tools/testing/selftests/bpf/ \
--I ${KERNEL_SRC}/tools/lib \
--I ${KERNEL_SRC}/tools/perf \
--I ${KERNEL_SRC}/tools/include \
--I ${BPFROOT} \
 -I ${INCLUDE} \
--I ${TOOLS}/testing/selftests/bpf \
 -D__KERNEL__ -D__BPF_TRACING__ -Wno-unused-value -Wno-pointer-sign \
 -D__TARGET_ARCH_$(ARCH) -Wno-compare-distinct-pointer-types \
 -Wno-gnu-variable-sized-type-not-at-end \
