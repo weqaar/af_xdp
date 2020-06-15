@@ -1,0 +1,2 @@
+Load:	sudo ip link set dev <interface> xdp object xdp_dummy.o sec proc
+Unload:	sudo ip link set dev <interface> xdp off
